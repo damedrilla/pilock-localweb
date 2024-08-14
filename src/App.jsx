@@ -9,7 +9,7 @@ export default function App() {
   const getSchedule = async () => {
     try {
       axios
-        .get("http://192.168.1.11:5000/schedule")
+        .get("http://127.0.0.1:5000/schedule")
         .then((response) => {
           console.log(response);
           setCurrentSchedule(response.data);
@@ -23,7 +23,7 @@ export default function App() {
   };
   const isCloudUp = async () => {
     try {
-      axios.get("http://192.168.1.11:5000/sanity_check").then((response) => {
+      axios.get("http://127.0.0.1:5000/sanity_check").then((response) => {
         console.log(response);
         setLocalMode(response.data.localMode);
       });
