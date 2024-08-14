@@ -2,7 +2,7 @@ import React from "react";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import { useState, useEffect } from "react";
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:5000"
+axios.defaults.baseURL = window.location.hostname + ":5000"
 export default function App() {
   const [currentSchedule, setCurrentSchedule] = useState([]);
   const [localMode, setLocalMode] = useState(false);
@@ -22,7 +22,7 @@ export default function App() {
     }
   };
   const isCloudUp = async () => {
-    console.log(window.location.host)
+    
     try {
       axios.get("/sanity_check").then((response) => {
         console.log(response);
