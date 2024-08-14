@@ -2,7 +2,7 @@ import React from "react";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import * as os from 'os';
+import os from 'os'
 const networkInterfaces = os.networkInterfaces();
 const ip = networkInterfaces['eth0'][0]['address'];
 
