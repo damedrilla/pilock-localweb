@@ -2,10 +2,10 @@ import React from "react";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import { useState, useEffect } from "react";
 import axios from "axios";
-url_ya_bastard = window.location.hostname + ":5000";
 export default function App() {
   const [currentSchedule, setCurrentSchedule] = useState([]);
   const [localMode, setLocalMode] = useState(false);
+  url_ya_bastard = window.location.hostname + ":5000";
   const getSchedule = async () => {
     try {
       axios
