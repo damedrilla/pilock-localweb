@@ -2,7 +2,7 @@ import React from "react";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import { useState, useEffect } from "react";
 import axios from "axios";
-axios.defaults.proxy.host = "http://localhost:5000"
+axios.defaults.baseURL = "http://localhost:5000"
 export default function App() {
   const [currentSchedule, setCurrentSchedule] = useState([]);
   const [localMode, setLocalMode] = useState(false);
