@@ -2,14 +2,14 @@ import React from "react";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import { useState, useEffect } from "react";
 import axios from "axios";
-axios.defaults.baseURL = window.location.hostname + ":5000"
+url_ya_bastard = window.location.hostname + ":5000";
 export default function App() {
   const [currentSchedule, setCurrentSchedule] = useState([]);
   const [localMode, setLocalMode] = useState(false);
   const getSchedule = async () => {
     try {
       axios
-        .get(`/schedule`)
+        .get(url_ya_bastard + "/schedule")
         .then((response) => {
           console.log(response);
           setCurrentSchedule(response.data);
@@ -22,9 +22,8 @@ export default function App() {
     }
   };
   const isCloudUp = async () => {
-    
     try {
-      axios.get("/sanity_check").then((response) => {
+      axios.get(url_ya_bastard + "/sanity_check").then((response) => {
         console.log(response);
         setLocalMode(response.data.localMode);
       });
@@ -53,7 +52,7 @@ export default function App() {
         user_course === currentSchedule.subject &&
         input_faculty === currentSchedule.instructor
       ) {
-        axios.post(`/unlock`);
+        axios.post(url_ya_bastard + "/unlock");
         alert(`Door unlocked!`);
       } else {
         alert(`fuck outta here boi`);
