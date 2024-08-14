@@ -9,7 +9,7 @@ export default function App() {
   const getSchedule = async () => {
     try {
       axios
-        .get( window.location.hostname + ":5000" + "/schedule")
+        .get("http://" + window.location.hostname + ":5000" + "/schedule")
         .then((response) => {
           console.log(response);
           setCurrentSchedule(response.data);
@@ -23,7 +23,7 @@ export default function App() {
   };
   const isCloudUp = async () => {
     try {
-      axios.get( window.location.hostname + ":5000" + "/sanity_check").then((response) => {
+      axios.get( "http://" + window.location.hostname + ":5000" + "/sanity_check").then((response) => {
         console.log(response);
         setLocalMode(response.data.localMode);
       });
@@ -52,7 +52,7 @@ export default function App() {
         user_course === currentSchedule.subject &&
         input_faculty === currentSchedule.instructor
       ) {
-        axios.post( window.location.hostname + ":5000" + "/unlock");
+        axios.post("http://" + window.location.hostname + ":5000" + "/unlock");
         alert(`Door unlocked!`);
       } else {
         alert(`fuck outta here boi`);
