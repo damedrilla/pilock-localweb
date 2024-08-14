@@ -5,11 +5,11 @@ import axios from "axios";
 export default function App() {
   const [currentSchedule, setCurrentSchedule] = useState([]);
   const [localMode, setLocalMode] = useState(false);
-  url_ya_bastard = window.location.hostname + ":5000";
+
   const getSchedule = async () => {
     try {
       axios
-        .get(url_ya_bastard + "/schedule")
+        .get( window.location.hostname + ":5000" + "/schedule")
         .then((response) => {
           console.log(response);
           setCurrentSchedule(response.data);
@@ -23,7 +23,7 @@ export default function App() {
   };
   const isCloudUp = async () => {
     try {
-      axios.get(url_ya_bastard + "/sanity_check").then((response) => {
+      axios.get( window.location.hostname + ":5000" + "/sanity_check").then((response) => {
         console.log(response);
         setLocalMode(response.data.localMode);
       });
@@ -52,7 +52,7 @@ export default function App() {
         user_course === currentSchedule.subject &&
         input_faculty === currentSchedule.instructor
       ) {
-        axios.post(url_ya_bastard + "/unlock");
+        axios.post( window.location.hostname + ":5000" + "/unlock");
         alert(`Door unlocked!`);
       } else {
         alert(`fuck outta here boi`);
