@@ -4,12 +4,15 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function App() {
+  const os = require('os');
+  const networkInterfaces = os.networkInterfaces();
+  const ip = networkInterfaces['eth0'][0]['address'];
   const [currentSchedule, setCurrentSchedule] = useState([]);
   const [localMode, setLocalMode] = useState(false);
   const getSchedule = async () => {
     try {
       axios
-        .get("http://127.0.0.1:5000/schedule")
+        .get(`http://'${ip}':5000/schedule`)
         .then((response) => {
           console.log(response);
           setCurrentSchedule(response.data);
@@ -23,7 +26,7 @@ export default function App() {
   };
   const isCloudUp = async () => {
     try {
-      axios.get("http://127.0.0.1:5000/sanity_check").then((response) => {
+      axios.get(`http://'${ip}':5000/sanity_check`).then((response) => {
         console.log(response);
         setLocalMode(response.data.localMode);
       });
@@ -52,7 +55,7 @@ export default function App() {
         user_course === currentSchedule.subject &&
         input_faculty === currentSchedule.instructor
       ) {
-        axios.post("http://192.168.1.11:5000/unlock");
+        axios.post(`http://'${ip}':5000/unlock`);
         alert(`Door unlocked!`);
       } else {
         alert(`fuck outta here boi`);
