@@ -22,6 +22,7 @@ export default function App() {
     }
   };
   const isCloudUp = async () => {
+    console.log(window.location.host)
     try {
       axios.get("/sanity_check").then((response) => {
         console.log(response);
