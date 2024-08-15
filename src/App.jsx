@@ -105,7 +105,7 @@ export default function App() {
           name="faculty"
         />
 
-        <MDBBtn type="submit" className="mb-4" disabled={!localMode} block>
+        <MDBBtn type="submit" className="mb-4" disabled={false} block>
           Unlock the door!
         </MDBBtn>
         <div className="text-center">
