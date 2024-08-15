@@ -2,6 +2,7 @@ import React from "react";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { BrowserView, MobileView } from "react-device-detect";
 export default function App() {
   const [currentSchedule, setCurrentSchedule] = useState([]);
   const [localMode, setLocalMode] = useState(false);
@@ -54,10 +55,8 @@ export default function App() {
       ) {
         axios.post("http://" + window.location.hostname + ":5000" + "/unlock");
         alert(`Door unlocked!`);
-        window.location.reload();
       } else {
         alert(`Try again!`);
-        window.location.reload();
       }
     } catch (err) {
       console.log(err);
@@ -65,54 +64,94 @@ export default function App() {
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-      }}
-    >
-      <form action={get_da_input}>
-        <div className="text-center">
-          <p style={{ fontWeight: "bold", color: "#03bafc", fontSize: 100 }}>
-            Pi-Lock:{" "}
-          </p>
-          <p
-            style={{
-              fontWeight: "bold",
-              color: "black",
-              fontSize: 40,
-              marginTop: -50,
-            }}
-          >
-            Last Resort{" "}
-          </p>
-          <p>Oh no! You forgot your ID card and there's no internet!</p>
+    <>
+      <BrowserView>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+          }}
+        >
+          <form action={get_da_input}>
+            <div className="text-center">
+              <p
+                style={{ fontWeight: "bold", color: "#03bafc", fontSize: 100 }}
+              >
+                Pi-Lock:{" "}
+              </p>
+              <p
+                style={{
+                  fontWeight: "bold",
+                  color: "black",
+                  fontSize: 40,
+                  marginTop: -50,
+                }}
+              >
+                Last Resort{" "}
+              </p>
+              <p>Oh no! You forgot your ID card and there's no internet!</p>
+            </div>
+            <div className="text-center">
+              <p>This webpage is only viewable in mobile</p>
+            </div>
+          </form>
         </div>
-        <MDBInput
-          className="mb-4"
-          type="text"
-          id="form2Example1"
-          label="Current schedule"
-          name="schedule"
-        />
-        <MDBInput
-          className="mb-4"
-          type="text"
-          id="form2Example2"
-          label="Faculty assigned"
-          name="faculty"
-        />
+      </BrowserView>
+      <MobileView>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+          }}
+        >
+          <form action={get_da_input}>
+            <div className="text-center">
+              <p
+                style={{ fontWeight: "bold", color: "#03bafc", fontSize: 100 }}
+              >
+                Pi-Lock:{" "}
+              </p>
+              <p
+                style={{
+                  fontWeight: "bold",
+                  color: "black",
+                  fontSize: 40,
+                  marginTop: -50,
+                }}
+              >
+                Last Resort{" "}
+              </p>
+              <p>Oh no! You forgot your ID card and there's no internet!</p>
+            </div>
+            <MDBInput
+              className="mb-4"
+              type="text"
+              id="form2Example1"
+              label="Current schedule"
+              name="schedule"
+            />
+            <MDBInput
+              className="mb-4"
+              type="text"
+              id="form2Example2"
+              label="Faculty assigned"
+              name="faculty"
+            />
 
-        <MDBBtn type="submit" className="mb-4" disabled={false} block>
-          Unlock the door!
-        </MDBBtn>
-        <div className="text-center">
-          <p>Disabled button means there's an internet connection</p>
-          <p style={{ marginTop: -15 }}>in the device. Use your ID card!</p>
+            <MDBBtn type="submit" className="mb-4" disabled={!localMode} block>
+              Unlock the door!
+            </MDBBtn>
+            <div className="text-center">
+              <p>Disabled button means there's an internet connection</p>
+              <p style={{ marginTop: -15 }}>in the device. Use your ID card!</p>
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
+      </MobileView>
+    </>
   );
 }

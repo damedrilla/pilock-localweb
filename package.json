@@ -14,6 +14,7 @@
     "axios": "^1.7.4",
     "mdb-react-ui-kit": "^8.0.0",
     "react": "^19.0.0-rc-d48603a5-20240813",
+    "react-device-detect": "^2.2.3",
     "react-dom": "^19.0.0-rc-d48603a5-20240813"
   },
   "devDependencies": {
