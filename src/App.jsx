@@ -23,17 +23,22 @@ export default function App() {
   };
   const isCloudUp = async () => {
     try {
-      axios.get( "http://" + window.location.hostname + ":5000" + "/sanity_check").then((response) => {
-        console.log(response);
-        setLocalMode(response.data.localMode);
-      });
+      axios
+        .get("http://" + window.location.hostname + ":5000" + "/sanity_check")
+        .then((response) => {
+          console.log(response);
+          setLocalMode(response.data.localMode);
+        });
     } catch (error) {
       console.error(error.message);
     }
   };
 
   useEffect(() => {
+    getSchedule();
+    isCloudUp();
     let interval = setInterval(() => {
+      getSchedule();
       isCloudUp();
     }, 5000);
     return () => {
@@ -42,8 +47,6 @@ export default function App() {
   }, []);
 
   async function get_da_input(formData) {
-    await getSchedule();
-    await isCloudUp();
     const user_course = formData.get("schedule");
     const input_faculty = formData.get("faculty");
 
@@ -103,7 +106,7 @@ export default function App() {
           name="faculty"
         />
 
-        <MDBBtn type="submit" className="mb-4" disabled={localMode} block>
+        <MDBBtn type="submit" className="mb-4" disabled={!localMode} block>
           Unlock the door!
         </MDBBtn>
         <div className="text-center">
