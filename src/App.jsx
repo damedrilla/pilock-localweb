@@ -11,7 +11,6 @@ export default function App() {
       axios
         .get("http://" + window.location.hostname + ":5000" + "/schedule")
         .then((response) => {
-          console.log(response);
           setCurrentSchedule(response.data);
         })
         .catch((error) => {
@@ -26,7 +25,6 @@ export default function App() {
       axios
         .get("http://" + window.location.hostname + ":5000" + "/sanity_check")
         .then((response) => {
-          console.log(response);
           setLocalMode(response.data.localMode);
         });
     } catch (error) {
