@@ -33,10 +33,8 @@ export default function App() {
   };
 
   useEffect(() => {
-    getSchedule();
     isCloudUp();
     let interval = setInterval(() => {
-      getSchedule();
       isCloudUp();
     }, 5000);
     return () => {
@@ -45,6 +43,7 @@ export default function App() {
   }, []);
 
   async function get_da_input(formData) {
+    getSchedule();
     const user_course = formData.get("schedule");
     const input_faculty = formData.get("faculty");
 
@@ -55,8 +54,10 @@ export default function App() {
       ) {
         axios.post("http://" + window.location.hostname + ":5000" + "/unlock");
         alert(`Door unlocked!`);
+        window.location.reload();
       } else {
-        alert(`fuck outta here boi`);
+        alert(`Try again!`);
+        window.location.reload();
       }
     } catch (err) {
       console.log(err);
