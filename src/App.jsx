@@ -76,6 +76,7 @@ function randomIntFromInterval(min, max) { // min and max included
         .then((response) => {
           console.log(response.status)
           if (response.status === 200) {
+            axios.post("http://" + domain + ":5000" + "/unlock/")
             alert(`Door unlocked!`);
           } else if (response.status === 202){
             alert(`Wrong password!`);
